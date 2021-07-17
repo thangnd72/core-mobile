@@ -1,0 +1,6 @@
+module Pods_NDTAPP_NDTAPPTests {
+  umbrella header "Pods-NDTAPP-NDTAPPTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
