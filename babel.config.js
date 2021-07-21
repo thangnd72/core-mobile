@@ -19,7 +19,7 @@ module.exports = {
           'locales/*': ['locales/*'],
           'constant/*': ['constant/*'],
           'assets/*': ['assets/*'],
-          'firebase/*': ['firebase/*'],
+          'hook/*': ['hook/*'],
 
         },
       },

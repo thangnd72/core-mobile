@@ -29,7 +29,7 @@
     "components/*": "components/*",
     "helpers/*": "helpers",
     "store/*": "store/*",
-    "firebase/*": "firebase/*",
+    "hook/*": "hook/*",
   },
   "include": [
     "src/**/*.ts",
