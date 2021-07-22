@@ -3,6 +3,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  ImageBackground,
 } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -16,7 +17,11 @@ import { FormStage, Row, Stage } from "models/form";
 import { LoginUser } from "models/auth";
 import { Image } from "react-native";
 import { IconImage } from "assets";
-import { sizes } from "utils/sizes";
+import { sizes, _screen_height, _screen_width } from "utils/sizes";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useColor } from "hook";
+import { useNavigation } from "@react-navigation/native";
+import { RouteName } from "constant";
 
 interface State {
   forms?: FormStage[];
@@ -26,7 +31,9 @@ interface State {
 type UIProps = State & typeof ContextAction & typeof AuthAction;
 
 const SignInLayout = (props: UIProps) => {
-
+  const insets = useSafeAreaInsets();
+  const color = useColor();
+  const navigation = useNavigation();
   const formik = useFormik({
     enableReinitialize: true,
     validationSchema: props.validationSchema,
@@ -49,9 +56,9 @@ const SignInLayout = (props: UIProps) => {
 
     if (form) {
       return (
-        <WrapperFrom>
+        <Layout>
           {form?.rows.map((r: Row, i: number) => (
-            <>
+            <Layout key={i}>
               {r.controls.map((c, index) => (
                 <TextInputUI
                   key={index}
@@ -68,7 +75,7 @@ const SignInLayout = (props: UIProps) => {
                           width: sizes._20sdp,
                           height: sizes._20sdp,
                         }}
-                        resizeMode='contain'
+                        resizeMode="contain"
                         source={IconImage.email}
                       />
                     ) : (
@@ -86,58 +93,109 @@ const SignInLayout = (props: UIProps) => {
                   }}
                 />
               ))}
-            </>
+            </Layout>
           ))}
-        </WrapperFrom>
+        </Layout>
       );
     }
     return <></>;
   };
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-      accessible={false}
-    >
-      <Container>
-        <KeyboardAvoidingView behavior="position" enabled>
-          <Layout marginHorizontal={20}>
-            <Image
+    <Button flex activeOpacity={1} onPress={() => Keyboard.dismiss()}>
+      <ImageBackground
+        blurRadius={15}
+        style={{
+          flex: 1,
+        }}
+        resizeMode="cover"
+        source={{
+          uri: "https://tiemanhsky.com/wp-content/uploads/2021/03/PHUS7968-Edit-scaled.jpg",
+        }}
+      >
+        <Layout style={{ flex: 1, justifyContent: "flex-end" }}>
+          <KeyboardAvoidingView behavior="position" enabled>
+            <Layout
+              color={color?.WHITE_COLOR}
+              paddingBottom={insets.bottom}
               style={{
-                width: sizes._200sdp,
-                height: sizes._200sdp,
-                marginTop: sizes._80sdp,
-                marginBottom: 0,
-                alignSelf: "center",
+                maxHeight: _screen_height,
+                borderTopLeftRadius: sizes._30sdp,
+                borderTopRightRadius: sizes._30sdp,
               }}
-              source={{
-                uri: "https://tiemanhsky.com/wp-content/uploads/2021/03/PHUS7968-Edit-scaled.jpg",
-              }}
-            />
-            {DisplayForm()}
-            <Button
-              flex
-              middle
-              centered
-              marginTop={sizes._17sdp}
-              height={sizes._52sdp}
-              borderRadius={sizes._10sdp}
-              color={'#000'}
-              onPress={handleLogin}
             >
-              <Label
-                size={15}
-                color={"white"}
+              <Layout marginHorizontal={sizes._20sdp} paddingTop={sizes._30sdp}>
+                <Label
+                  h2
+                  style={{ fontWeight: "600" }}
+                  color={color?.DEAFULT_TEXT_COLOR}
+                >
+                  Welcome!
+                </Label>
+                <Label b2 paddingTop={sizes._5sdp} color={color?.GRAY_COLOR}>
+                  Sign in to continue
+                </Label>
+              </Layout>
+              <Layout
+                marginHorizontal={sizes._20sdp}
+                paddingVertical={sizes._10sdp}
               >
-                Đăng nhập
-              </Label>
-            </Button>
-          </Layout>
-        </KeyboardAvoidingView>
-      </Container>
-    </TouchableWithoutFeedback>
+                {DisplayForm()}
+                <Button
+                  activeOpacity={0.8}
+                  middle
+                  centered
+                  marginTop={sizes._17sdp}
+                  height={sizes._52sdp}
+                  borderRadius={sizes._15sdp}
+                  color={color?.PRIMARY_COLOR}
+                  onPress={handleLogin}
+                >
+                  <Label
+                    style={{ fontWeight: "700" }}
+                    size={sizes._16sdp}
+                    color={color?.WHITE_COLOR}
+                  >
+                    Log In
+                  </Label>
+                </Button>
+                <Label
+                  onPress={() => {}}
+                  style={{ textAlign: "center", fontStyle: "italic" }}
+                  padding={sizes._10sdp}
+                  marginTop={sizes._10sdp}
+                  marginBottom={sizes._20sdp}
+                  size={sizes._14sdp}
+                  color={color?.GRAY_COLOR}
+                >
+                  Forgot password?
+                </Label>
+                <Button
+                  activeOpacity={0.8}
+                  middle
+                  centered
+                  height={sizes._52sdp}
+                  borderRadius={sizes._15sdp}
+                  borderColor={color?.BORDER_COLOR}
+                  borderWidth={1}
+                  onPress={() => {
+                    navigation.navigate(RouteName.SIGN_UP);
+                  }}
+                >
+                  <Label
+                    style={{ fontWeight: "700" }}
+                    size={sizes._16sdp}
+                    color={color?.DEAFULT_TEXT_COLOR}
+                  >
+                    Sign up
+                  </Label>
+                </Button>
+              </Layout>
+            </Layout>
+          </KeyboardAvoidingView>
+        </Layout>
+      </ImageBackground>
+    </Button>
   );
 };
 const mapStateToProps = (state: ApplicationState) => ({
@@ -152,9 +210,3 @@ const mapDispatchToProps = {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(SignInLayout as any);
-
-const WrapperFrom = styled.View``;
-const Container = styled.SafeAreaView`
-  flex: 1;
-  background-color: #fff;
-`;

@@ -15,11 +15,11 @@ export const OPTS_COMMON = {
     <View
       style={{
         paddingLeft: 10,
-        paddingRight: 5,
+        paddingRight: 10,
         paddingVertical: 5,
       }}>
       <Image
-        style={{width: sizes._20sdp, height: sizes._20sdp}}
+        style={{width: sizes._25sdp, height: sizes._25sdp}}
         source={IconImage.back}
       />
     </View>

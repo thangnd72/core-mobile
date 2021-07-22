@@ -14,6 +14,7 @@ import { Layout, Label } from "components";
 import { IconImage } from "assets";
 import { sizes } from "utils/sizes";
 import useColor from "hook/useColor";
+import { TypeField } from "models/form";
 export interface TextInputUIProps {
   title?: string;
   onSubmitEditing?: (
@@ -27,7 +28,7 @@ export interface TextInputUIProps {
   keyboardType?: KeyboardType;
   textValue?: string;
   errorMessage?: string;
-  type?: string;
+  type?: TypeField;
   maxLength?: number;
   editable?: boolean;
   contentStyle?: StyleProp<ViewStyle>;
@@ -77,7 +78,7 @@ const TextInputUI = (props: TextInputUIProps) => {
         <TextInputStyled
           returnKeyLabel="Xong"
           returnKeyType="done"
-          secureTextEntry={type === "password" && !hiden && true}
+          secureTextEntry={type === TypeField.PASSWORD && !hiden && true}
           keyboardType={keyboardType}
           style={contentstyle}
           maxLength={maxLength}
@@ -91,10 +92,10 @@ const TextInputUI = (props: TextInputUIProps) => {
           }}
           multiline={multiline}
           placeholder={placeholder}
-          placeholderTextColor={color?.placeholderColor}
+          placeholderTextColor={color?.GRAY_COLOR}
           onSubmitEditing={onSubmitEditing}
         />
-        {type === "password" && (
+        {type === TypeField.PASSWORD && (
           <EyeStyled
             onPress={() => {
               setHiden(!hiden);
@@ -117,7 +118,7 @@ const TextInputUI = (props: TextInputUIProps) => {
       {errorMessage && (
         <Label
           color="red"
-          style={{ fonSize: sizes._10sdp, fontStyle: "italic" }}
+          style={{ fontSize: sizes._10sdp, fontStyle: "italic" }}
           paddingTop={sizes._10sdp}
         >
           {errorMessage}

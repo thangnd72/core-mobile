@@ -41,9 +41,9 @@ export const Forms: FormStage[] = [
       {
         controls: [
           {
-            fieldName: "lastName",
-            label: "LastName",
-            placeholder: "LastName",
+            fieldName: "firstName",
+            label: "FirstName",
+            placeholder: "First name",
             type: TypeField.TEXT,
           },
         ],
@@ -51,10 +51,10 @@ export const Forms: FormStage[] = [
       {
         controls: [
           {
-            fieldName: "firstName",
-            label: "FirstName",
-            placeholder: "FirstName",
-            type: TypeField.PASSWORD,
+            fieldName: "lastName",
+            label: "LastName",
+            placeholder: "Last name",
+            type: TypeField.TEXT,
           },
         ],
       },
@@ -81,9 +81,9 @@ export const Forms: FormStage[] = [
       {
         controls: [
           {
-            fieldName: "repeatpassword",
-            label: "Re-Password",
-            placeholder: "Re-Password",
+            fieldName: "repeatPassword",
+            label: "Re-password",
+            placeholder: "Re-password",
             type: TypeField.PASSWORD,
           },
         ],
@@ -94,13 +94,13 @@ export const Forms: FormStage[] = [
 
 export const validationSignUpSchema = Yup.object().shape({
   lastName: Yup.string()
-    .required("LastName is require")
+    .required("Last name is require")
     .matches(nameRegExp, "LastName can not have special character"),
   firstName: Yup.string()
-    .required("FirstName is require")
+    .required("First name is require")
     .matches(nameRegExp, "FirstName can not have special character"),
   email: Yup.string()
-    .required("Email is require")
+    .required("Email is require!")
     .matches(emailRegExp, "Email not match format user@gmail.com"),
 
   password: Yup.string()
@@ -108,8 +108,8 @@ export const validationSignUpSchema = Yup.object().shape({
       passRegExp,
       "Your password MUST have at least one UPPERCASE character and one Special (Non-Alphanumeric) character (eg. ! @ # $ % ^ & * ) "
     )
-    .required("Password is require"),
-  repeatpassword: Yup.string().oneOf(
+    .required("Password is required!"),
+    repeatPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Password not match"
   ),
@@ -117,10 +117,10 @@ export const validationSignUpSchema = Yup.object().shape({
 
 export const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .required("Nhập tài khoản!")
-    .matches(emailRegExp, "Email không đúng định dạng user@gmail.com"),
+    .required("Email is required")
+    .matches(emailRegExp, "Email not match format user@gmail.com"),
 
-  password: Yup.string().required("Nhập mật khẩu"),
+  password: Yup.string().required("Password is required"),
 });
 
 export interface AuthenticateState {
