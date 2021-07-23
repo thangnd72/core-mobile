@@ -13,16 +13,14 @@ import { ApplicationState } from "store/configureAction";
 import { TextInputUI, Layout, Label, Button } from "components";
 import { useFormik } from "formik";
 import { FormStage, Row, Stage } from "models/form";
-import {  Register } from "models/auth";
+import { Register } from "models/auth";
 import { Image } from "react-native";
-import { IconImage } from "assets";
+import { BackgroundImage, IconImage } from "assets";
 import { sizes, _screen_height, _screen_width } from "utils/sizes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useColor } from "hook";
+import { useColor, useKeyboard } from "hook";
 import { useNavigation } from "@react-navigation/native";
-import { RouteName } from "constant";
-import styled from "styled-components/native";
-
+import { ScrollView } from "react-native-gesture-handler";
 
 interface State {
   forms?: FormStage[];
@@ -34,6 +32,8 @@ type UIProps = State & typeof ContextAction & typeof AuthAction;
 const SignUpLayout = (props: UIProps) => {
   const insets = useSafeAreaInsets();
   const color = useColor();
+  const [keyboardHeight] = useKeyboard();
+
   const navigation = useNavigation();
   const formik = useFormik({
     enableReinitialize: true,
@@ -60,7 +60,7 @@ const SignUpLayout = (props: UIProps) => {
             height: 20,
             tintColor: color?.DEAFULT_TEXT_COLOR,
           }}
-          source={IconImage.email}
+          source={IconImage.user}
         />
       );
     if (fieldName === "lastName")
@@ -71,7 +71,7 @@ const SignUpLayout = (props: UIProps) => {
             height: 20,
             tintColor: color?.DEAFULT_TEXT_COLOR,
           }}
-          source={IconImage.email}
+          source={IconImage.user}
         />
       );
     if (fieldName === "email")
@@ -140,104 +140,127 @@ const SignUpLayout = (props: UIProps) => {
   };
 
   return (
-    <Button flex activeOpacity={1} onPress={() => Keyboard.dismiss()}>
-      <ImageBackground
-        blurRadius={15}
-        style={{
-          flex: 1,
-        }}
-        resizeMode="cover"
-        source={{
-          uri: "https://tiemanhsky.com/wp-content/uploads/2021/03/PHUS7968-Edit-scaled.jpg",
-        }}
-      >
+    <ImageBackground
+      blurRadius={15}
+      style={{
+        flex: 1,
+      }}
+      resizeMode="cover"
+      source={BackgroundImage.background}
+    >
       <Layout style={{ flex: 1, justifyContent: "flex-end" }}>
-        <KeyboardAvoidingView behavior="position" enabled>
-          <Layout
-            color={color?.WHITE_COLOR}
-            paddingBottom={insets.bottom}
-            style={{
-              maxHeight: _screen_height,
-              borderTopLeftRadius: sizes._30sdp,
-              borderTopRightRadius: sizes._30sdp,
-            }}
-          >
-            <Layout marginHorizontal={sizes._20sdp} paddingTop={sizes._30sdp}>
-              <Label
-                h2
-                style={{ fontWeight: "600" }}
-                color={color?.DEAFULT_TEXT_COLOR}
-              >
-                Create an account
-              </Label>
-              <Label b2 paddingTop={sizes._5sdp} color={color?.GRAY_COLOR}>
-                Start you career with us
-              </Label>
-            </Layout>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+          accessible={false}
+        >
+          <KeyboardAvoidingView behavior="position" enabled>
             <Layout
-              marginHorizontal={sizes._20sdp}
-              paddingVertical={sizes._10sdp}
+              color={color?.WHITE_COLOR}
+              paddingBottom={insets.bottom}
+              style={{
+                maxHeight:
+                  keyboardHeight > 0
+                    ? _screen_height - keyboardHeight
+                    : _screen_height,
+                borderTopLeftRadius: sizes._30sdp,
+                borderTopRightRadius: sizes._30sdp,
+              }}
             >
-              {DisplayForm()}
-              <Button
-                activeOpacity={0.8}
-                middle
-                centered
-                marginTop={sizes._17sdp}
-                height={sizes._52sdp}
-                borderRadius={sizes._15sdp}
-                color={color?.PRIMARY_COLOR}
-                onPress={handleSignup}
-              >
-                <Label
-                  style={{ fontWeight: "700" }}
-                  size={sizes._16sdp}
-                  color={"white"}
-                >
-                  Sign up
-                </Label>
-              </Button>
-            </Layout>
-            <Layout horizontal marginTop={sizes._20sdp}>
-              <Label
-                onPress={() => {}}
-                style={{ textAlign: "center", fontStyle: "italic" }}
-                padding={sizes._10sdp}
-                marginTop={sizes._10sdp}
-                marginBottom={sizes._20sdp}
-                size={sizes._14sdp}
-                paddingHorizontal={sizes._20sdp}
-                color={color?.GRAY_COLOR}
-              >
-                Already have an account?
-              </Label>
-              <Button
-                activeOpacity={0.8}
-                middle
-                centered
-                height={sizes._52sdp}
-                borderRadius={sizes._15sdp}
-                borderColor={color?.BORDER_COLOR}
-                borderWidth={1}
-                paddingHorizontal={sizes._52sdp}
-                onPress={() => {
-                  navigation.goBack();
+              <Layout
+                style={{
+                  borderBottomLeftRadius: sizes._30sdp,
+                  borderBottomRightRadius: sizes._30sdp,
                 }}
+                paddingBottom={sizes._10sdp}
+                paddingTop={
+                  keyboardHeight > 0 ? sizes._60sdp + insets.top : sizes._30sdp
+                }
               >
                 <Label
-                  style={{ fontWeight: "700" }}
-                  size={sizes._16sdp}
+                  h2
+                  marginHorizontal={sizes._20sdp}
+                  style={{ fontWeight: "600" }}
                   color={color?.DEAFULT_TEXT_COLOR}
                 >
-                  Login
+                  Create an account
                 </Label>
-              </Button>
+                <Label
+                  b2
+                  paddingTop={sizes._5sdp}
+                  marginHorizontal={sizes._20sdp}
+                  color={color?.GRAY_COLOR}
+                >
+                  Start you career with us
+                </Label>
+              </Layout>
+              <ScrollView>
+                <Layout
+                  marginHorizontal={sizes._20sdp}
+                  paddingVertical={sizes._10sdp}
+                >
+                  {DisplayForm()}
+                  <Button
+                    activeOpacity={0.8}
+                    middle
+                    centered
+                    marginTop={sizes._17sdp}
+                    height={sizes._52sdp}
+                    borderRadius={sizes._15sdp}
+                    color={color?.PRIMARY_COLOR}
+                    onPress={handleSignup}
+                  >
+                    <Label
+                      style={{ fontWeight: "700" }}
+                      size={sizes._16sdp}
+                      color={"white"}
+                    >
+                      Sign up
+                    </Label>
+                  </Button>
+                </Layout>
+                <Layout horizontal marginTop={sizes._20sdp}>
+                  <Label
+                    onPress={() => {}}
+                    style={{ textAlign: "center", fontStyle: "italic" }}
+                    padding={sizes._10sdp}
+                    marginTop={sizes._10sdp}
+                    marginBottom={sizes._20sdp}
+                    size={sizes._14sdp}
+                    paddingHorizontal={sizes._20sdp}
+                    color={color?.GRAY_COLOR}
+                  >
+                    Already have an account?
+                  </Label>
+                  <Button
+                    activeOpacity={0.8}
+                    middle
+                    centered
+                    height={sizes._52sdp}
+                    borderRadius={sizes._15sdp}
+                    borderColor={color?.BORDER_COLOR}
+                    borderWidth={1}
+                    paddingHorizontal={sizes._52sdp}
+                    onPress={() => {
+                      navigation.goBack();
+                    }}
+                  >
+                    <Label
+                      style={{ fontWeight: "700" }}
+                      size={sizes._16sdp}
+                      color={color?.DEAFULT_TEXT_COLOR}
+                    >
+                      Login
+                    </Label>
+                  </Button>
+                </Layout>
+              </ScrollView>
             </Layout>
-          </Layout>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
       </Layout>
-      </ImageBackground>
-    </Button>
+    </ImageBackground>
   );
 };
 const mapStateToProps = (state: ApplicationState) => ({

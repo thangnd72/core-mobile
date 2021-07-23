@@ -10,16 +10,15 @@ import { compose } from "redux";
 import { ActionCreators as ContextAction } from "store/context";
 import { ActionCreators as AuthAction } from "store/authenticate";
 import { ApplicationState } from "store/configureAction";
-import styled from "styled-components/native";
 import { TextInputUI, Layout, Label, Button } from "components";
 import { useFormik } from "formik";
 import { FormStage, Row, Stage } from "models/form";
 import { LoginUser } from "models/auth";
 import { Image } from "react-native";
-import { IconImage } from "assets";
+import { IconImage, BackgroundImage } from "assets";
 import { sizes, _screen_height, _screen_width } from "utils/sizes";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useColor } from "hook";
+import { useColor, useKeyboard } from "hook";
 import { useNavigation } from "@react-navigation/native";
 import { RouteName } from "constant";
 
@@ -33,6 +32,7 @@ type UIProps = State & typeof ContextAction & typeof AuthAction;
 const SignInLayout = (props: UIProps) => {
   const insets = useSafeAreaInsets();
   const color = useColor();
+  const [keyboardHeight] = useKeyboard();
   const navigation = useNavigation();
   const formik = useFormik({
     enableReinitialize: true,
@@ -40,6 +40,7 @@ const SignInLayout = (props: UIProps) => {
     initialValues: { ...props.user },
     onSubmit: (values: any) => {
       // props.Login(values)
+      props.FieldChange('isLoggedIn', true);
     },
   });
   const errorMessage = (fieldName: string) => {
@@ -102,24 +103,30 @@ const SignInLayout = (props: UIProps) => {
   };
 
   return (
-    <Button flex activeOpacity={1} onPress={() => Keyboard.dismiss()}>
-      <ImageBackground
-        blurRadius={15}
-        style={{
-          flex: 1,
-        }}
-        resizeMode="cover"
-        source={{
-          uri: "https://tiemanhsky.com/wp-content/uploads/2021/03/PHUS7968-Edit-scaled.jpg",
-        }}
-      >
-        <Layout style={{ flex: 1, justifyContent: "flex-end" }}>
+    <ImageBackground
+      blurRadius={5}
+      style={{
+        flex: 1,
+      }}
+      resizeMode="cover"
+      source={BackgroundImage.background}
+    >
+      <Layout style={{ flex: 1, justifyContent: "flex-end" }}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            Keyboard.dismiss();
+          }}
+          accessible={false}
+        >
           <KeyboardAvoidingView behavior="position" enabled>
             <Layout
               color={color?.WHITE_COLOR}
               paddingBottom={insets.bottom}
               style={{
-                maxHeight: _screen_height,
+                maxHeight:
+                  keyboardHeight > 0
+                    ? _screen_height - keyboardHeight
+                    : _screen_height,
                 borderTopLeftRadius: sizes._30sdp,
                 borderTopRightRadius: sizes._30sdp,
               }}
@@ -193,9 +200,9 @@ const SignInLayout = (props: UIProps) => {
               </Layout>
             </Layout>
           </KeyboardAvoidingView>
-        </Layout>
-      </ImageBackground>
-    </Button>
+        </TouchableWithoutFeedback>
+      </Layout>
+    </ImageBackground>
   );
 };
 const mapStateToProps = (state: ApplicationState) => ({

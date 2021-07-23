@@ -9,4 +9,9 @@ export const IconImage = {
     eye: require('./images/eye.png'),
     lock: require('./images/lock.png'),
     email: require('./images/email.png'),
+    user: require('./images/user.png'),
+}
+
+export const BackgroundImage = {
+    background: require('./images/background.png')
 }
