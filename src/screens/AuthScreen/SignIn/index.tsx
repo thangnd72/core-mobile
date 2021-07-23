@@ -4,6 +4,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ImageBackground,
+  Platform,
+  ScrollView,
 } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -40,7 +42,7 @@ const SignInLayout = (props: UIProps) => {
     initialValues: { ...props.user },
     onSubmit: (values: any) => {
       // props.Login(values)
-      props.FieldChange('isLoggedIn', true);
+      props.FieldChange("isLoggedIn", true);
     },
   });
   const errorMessage = (fieldName: string) => {
@@ -118,7 +120,11 @@ const SignInLayout = (props: UIProps) => {
           }}
           accessible={false}
         >
-          <KeyboardAvoidingView behavior="position" enabled>
+          <KeyboardAvoidingView
+            style={{ flex: 1, justifyContent: "flex-end" }}
+            behavior={Platform.OS === "android" ? "height" : "padding"}
+            enabled={true}
+          >
             <Layout
               color={color?.WHITE_COLOR}
               paddingBottom={insets.bottom}
@@ -127,8 +133,14 @@ const SignInLayout = (props: UIProps) => {
                   keyboardHeight > 0
                     ? _screen_height - keyboardHeight
                     : _screen_height,
-                borderTopLeftRadius: sizes._30sdp,
-                borderTopRightRadius: sizes._30sdp,
+                borderTopLeftRadius:
+                  Platform.OS === "android" && keyboardHeight > 0
+                    ? 0
+                    : sizes._30sdp,
+                borderTopRightRadius:
+                  Platform.OS === "android" && keyboardHeight > 0
+                    ? 0
+                    : sizes._30sdp,
               }}
             >
               <Layout marginHorizontal={sizes._20sdp} paddingTop={sizes._30sdp}>
@@ -143,61 +155,121 @@ const SignInLayout = (props: UIProps) => {
                   Sign in to continue
                 </Label>
               </Layout>
-              <Layout
-                marginHorizontal={sizes._20sdp}
-                paddingVertical={sizes._10sdp}
-              >
-                {DisplayForm()}
-                <Button
-                  activeOpacity={0.8}
-                  middle
-                  centered
-                  marginTop={sizes._17sdp}
-                  height={sizes._52sdp}
-                  borderRadius={sizes._15sdp}
-                  color={color?.PRIMARY_COLOR}
-                  onPress={handleLogin}
-                >
-                  <Label
-                    style={{ fontWeight: "700" }}
-                    size={sizes._16sdp}
-                    color={color?.WHITE_COLOR}
+              {Platform.OS === "android" ? (
+                <ScrollView>
+                  <Layout
+                    marginHorizontal={sizes._20sdp}
+                    paddingVertical={sizes._10sdp}
                   >
-                    Log In
-                  </Label>
-                </Button>
-                <Label
-                  onPress={() => {}}
-                  style={{ textAlign: "center", fontStyle: "italic" }}
-                  padding={sizes._10sdp}
-                  marginTop={sizes._10sdp}
-                  marginBottom={sizes._20sdp}
-                  size={sizes._14sdp}
-                  color={color?.GRAY_COLOR}
+                    {DisplayForm()}
+                    <Button
+                      activeOpacity={0.8}
+                      middle
+                      centered
+                      marginTop={sizes._17sdp}
+                      height={sizes._52sdp}
+                      borderRadius={sizes._15sdp}
+                      color={color?.PRIMARY_COLOR}
+                      onPress={handleLogin}
+                    >
+                      <Label
+                        style={{ fontWeight: "700" }}
+                        size={sizes._16sdp}
+                        color={color?.WHITE_COLOR}
+                      >
+                        Log In
+                      </Label>
+                    </Button>
+                    <Label
+                      onPress={() => {}}
+                      style={{ textAlign: "center", fontStyle: "italic" }}
+                      padding={sizes._10sdp}
+                      marginTop={sizes._10sdp}
+                      marginBottom={sizes._20sdp}
+                      size={sizes._14sdp}
+                      color={color?.GRAY_COLOR}
+                    >
+                      Forgot password?
+                    </Label>
+                    <Button
+                      activeOpacity={0.8}
+                      middle
+                      centered
+                      height={sizes._52sdp}
+                      borderRadius={sizes._15sdp}
+                      borderColor={color?.BORDER_COLOR}
+                      borderWidth={1}
+                      onPress={() => {
+                        navigation.navigate(RouteName.SIGN_UP);
+                      }}
+                    >
+                      <Label
+                        style={{ fontWeight: "700" }}
+                        size={sizes._16sdp}
+                        color={color?.DEAFULT_TEXT_COLOR}
+                      >
+                        Sign up
+                      </Label>
+                    </Button>
+                  </Layout>
+                </ScrollView>
+              ) : (
+                <Layout
+                  marginHorizontal={sizes._20sdp}
+                  paddingVertical={sizes._10sdp}
                 >
-                  Forgot password?
-                </Label>
-                <Button
-                  activeOpacity={0.8}
-                  middle
-                  centered
-                  height={sizes._52sdp}
-                  borderRadius={sizes._15sdp}
-                  borderColor={color?.BORDER_COLOR}
-                  borderWidth={1}
-                  onPress={() => {
-                    navigation.navigate(RouteName.SIGN_UP);
-                  }}
-                >
-                  <Label
-                    style={{ fontWeight: "700" }}
-                    size={sizes._16sdp}
-                    color={color?.DEAFULT_TEXT_COLOR}
+                  {DisplayForm()}
+                  <Button
+                    activeOpacity={0.8}
+                    middle
+                    centered
+                    marginTop={sizes._17sdp}
+                    height={sizes._52sdp}
+                    borderRadius={sizes._15sdp}
+                    color={color?.PRIMARY_COLOR}
+                    onPress={handleLogin}
                   >
-                    Sign up
+                    <Label
+                      style={{ fontWeight: "700" }}
+                      size={sizes._16sdp}
+                      color={color?.WHITE_COLOR}
+                    >
+                      Log In
+                    </Label>
+                  </Button>
+                  <Label
+                    onPress={() => {}}
+                    style={{ textAlign: "center", fontStyle: "italic" }}
+                    padding={sizes._10sdp}
+                    marginTop={sizes._10sdp}
+                    marginBottom={sizes._20sdp}
+                    size={sizes._14sdp}
+                    color={color?.GRAY_COLOR}
+                  >
+                    Forgot password?
                   </Label>
-                </Button>
-              </Layout>
+                  <Button
+                    activeOpacity={0.8}
+                    middle
+                    centered
+                    height={sizes._52sdp}
+                    borderRadius={sizes._15sdp}
+                    borderColor={color?.BORDER_COLOR}
+                    borderWidth={1}
+                    onPress={() => {
+                      navigation.navigate(RouteName.SIGN_UP);
+                    }}
+                  >
+                    <Label
+                      style={{ fontWeight: "700" }}
+                      size={sizes._16sdp}
+                      color={color?.DEAFULT_TEXT_COLOR}
+                    >
+                      Sign up
+                    </Label>
+                  </Button>
+                </Layout>
+              )}
             </Layout>
           </KeyboardAvoidingView>
         </TouchableWithoutFeedback>

@@ -78,16 +78,16 @@ export const Forms: FormStage[] = [
           },
         ],
       },
-      {
-        controls: [
-          {
-            fieldName: "repeatPassword",
-            label: "Re-password",
-            placeholder: "Re-password",
-            type: TypeField.PASSWORD,
-          },
-        ],
-      },
+      // {
+      //   controls: [
+      //     {
+      //       fieldName: "repeatPassword",
+      //       label: "Re-password",
+      //       placeholder: "Re-password",
+      //       type: TypeField.PASSWORD,
+      //     },
+      //   ],
+      // },
     ],
   },
 ];

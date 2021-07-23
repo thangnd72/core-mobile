@@ -21,6 +21,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useColor, useKeyboard } from "hook";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
+import { Platform } from "react-native";
 
 interface State {
   forms?: FormStage[];
@@ -155,7 +156,11 @@ const SignUpLayout = (props: UIProps) => {
           }}
           accessible={false}
         >
-          <KeyboardAvoidingView behavior="position" enabled>
+          <KeyboardAvoidingView
+            style={{ flex: 1, justifyContent: "flex-end" }}
+            behavior={Platform.OS === "android" ? "height" : "padding"}
+            enabled={true}
+          >
             <Layout
               color={color?.WHITE_COLOR}
               paddingBottom={insets.bottom}
@@ -164,8 +169,8 @@ const SignUpLayout = (props: UIProps) => {
                   keyboardHeight > 0
                     ? _screen_height - keyboardHeight
                     : _screen_height,
-                borderTopLeftRadius: sizes._30sdp,
-                borderTopRightRadius: sizes._30sdp,
+                borderTopLeftRadius: keyboardHeight > 0 ? 0 : sizes._30sdp,
+                borderTopRightRadius: keyboardHeight > 0 ? 0 : sizes._30sdp,
               }}
             >
               <Layout
