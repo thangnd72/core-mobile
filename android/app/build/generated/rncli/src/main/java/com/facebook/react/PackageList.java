@@ -19,6 +19,8 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-onesignal
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
@@ -80,6 +82,7 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new RNDeviceInfo(),
       new RNGestureHandlerPackage(),
+      new ReactNativeOneSignalPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
