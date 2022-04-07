@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/administrator/MYAPP/core-mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-or/values-or.xml",
+            "outputFile": "/Volumes/DATA/MYAPP/core-mobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-or/values-or.xml",
             "map": [
                 {
                     "source": "/Users/administrator/.gradle/caches/transforms-2/files-2.1/2631375de80937c90cd3a1032ab35871/jetified-play-services-base-17.0.0/res/values-or/values.xml",
