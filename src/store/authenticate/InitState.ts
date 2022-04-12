@@ -109,7 +109,7 @@ export const validationSignUpSchema = Yup.object().shape({
       "Your password MUST have at least one UPPERCASE character and one Special (Non-Alphanumeric) character (eg. ! @ # $ % ^ & * ) "
     )
     .required("Password is required!"),
-    repeatPassword: Yup.string().oneOf(
+  repeatPassword: Yup.string().oneOf(
     [Yup.ref("password"), null],
     "Password not match"
   ),
@@ -139,8 +139,8 @@ export const InitState: AuthenticateState = {
   stage: Stage.LOGIN,
   forms: Forms,
   user: {
-    email: "",
-    password: "",
+    email: "test@gmail.com",
+    password: "Abc@1234",
   },
   register: {
     lastName: "",
