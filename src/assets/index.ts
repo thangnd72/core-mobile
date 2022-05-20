@@ -15,3 +15,10 @@ export const IconImage = {
 export const BackgroundImage = {
     background: require('./images/background.png')
 }
+
+export const ImageSource = {
+    intro_slide1: require('./images/intro-slide1.png'),
+    intro_slide2: require('./images/intro-slide2.png'),
+    intro_slide3: require('./images/intro-slide3.png'),
+    splash: require('./images/splash.png'),
+}

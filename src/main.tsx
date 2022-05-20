@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import OneSignal from "react-native-onesignal";
@@ -6,6 +7,7 @@ import SplashScreen from "react-native-splash-screen";
 import { Provider } from "react-redux";
 import SwitchScreen from "screens/SwitchScreen";
 import store from "store/configureStore";
+import { ActionType as ContextType } from "store/context";
 const navTheme = {
   ...DefaultTheme,
   colors: {
@@ -28,9 +30,38 @@ const AppLayout = () => {
     SplashScreen.hide();
   });
 
+  useEffect(() => {
+    // AsyncStorage.clear();
+    CheckSplash();
+    Splash();
+  }, []);
+
   const getUserId = async () => {
     const info = await OneSignal.getDeviceState();
-    console.log("userId", info?.userId);
+  };
+
+  const Splash = () => {
+    setTimeout(() => {
+      store.dispatch({
+        type: ContextType.FIELD_CHANGE,
+        fieldName: "loaded",
+        fieldValue: true,
+      });
+    }, 1000);
+  };
+
+  const CheckSplash = () => {
+    (async () => {
+      const displaySplash = await AsyncStorage.getItem("thangnd@splash");
+
+      if (displaySplash && displaySplash != undefined) {
+        store.dispatch({
+          type: ContextType.FIELD_CHANGE,
+          fieldName: "displaySplash",
+          fieldValue: true,
+        });
+      }
+    })();
   };
 
   return (

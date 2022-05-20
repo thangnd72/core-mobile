@@ -8,16 +8,12 @@
         "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\layout\\launch_screen.xml"
     },
     {
+        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_splash_image.png.flat",
+        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\drawable-mdpi\\splash_image.png"
+    },
+    {
         "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
         "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
         "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
@@ -32,28 +28,12 @@
         "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_splash_image.png.flat",
+        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\drawable-xxxhdpi\\splash_image.png"
     },
     {
         "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_splash_image.png.flat",
         "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\drawable-xhdpi\\splash_image.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_splash_image.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\drawable-mdpi\\splash_image.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
-    },
-    {
-        "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_splash_image.png.flat",
-        "source": "D:\\MY_APP\\core-mobile\\android\\app\\src\\main\\res\\drawable-xxxhdpi\\splash_image.png"
     },
     {
         "merged": "D:\\MY_APP\\core-mobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_splash_image.png.flat",

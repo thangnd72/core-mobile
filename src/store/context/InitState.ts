@@ -20,6 +20,6 @@ export const reportSchema = Yup.object().shape({
 export const InitState: ContextState = {
   isConnection: true,
   theme: Theme.DARK,
-  displaySplash: true,
+  displaySplash: false,
   locale: "VN",
 };
