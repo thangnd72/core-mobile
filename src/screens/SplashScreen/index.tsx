@@ -9,9 +9,10 @@ import {
   Text,
   useWindowDimensions,
   View,
+  TouchableOpacity,
 } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { ApplicationState } from "store/configureAction";

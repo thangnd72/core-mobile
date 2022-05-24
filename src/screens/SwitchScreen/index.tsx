@@ -17,7 +17,7 @@ const SwitchScreen = (props: UIProps) => {
     <>
       <StatusBar
         backgroundColor={"transparent"}
-        barStyle={'light-content'}
+        barStyle={"dark-content"}
         translucent
       />
       <View style={{ flex: 1 }}>

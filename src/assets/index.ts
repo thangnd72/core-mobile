@@ -11,6 +11,7 @@ export const IconImage = {
     email: require('./images/email.png'),
     user: require('./images/user.png'),
     left_arrow: require('./images/left-arrow.png'),
+    plus: require('./images/plus.png'),
 }
 
 export const BackgroundImage = {
