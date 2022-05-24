@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import OneSignal from "react-native-onesignal";

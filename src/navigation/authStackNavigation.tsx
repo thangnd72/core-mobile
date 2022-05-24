@@ -30,6 +30,7 @@ export class AuthStack extends React.Component<Props> {
           options={{
             headerTransparent: true,
             headerTitle: "",
+            headerShown: false,
           }}
         />
         <Stack.Screen

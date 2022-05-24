@@ -10,6 +10,7 @@ export const IconImage = {
     lock: require('./images/lock.png'),
     email: require('./images/email.png'),
     user: require('./images/user.png'),
+    left_arrow: require('./images/left-arrow.png'),
 }
 
 export const BackgroundImage = {

@@ -7,6 +7,7 @@ import { Image } from "react-native";
 import { TabIcon } from "assets";
 import { sizes } from "utils/sizes";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
 const Tab = createBottomTabNavigator();
 
 type Props = {};
@@ -15,15 +16,19 @@ export const TabContainer = (props: Props) => {
     <Tab.Navigator
       initialRouteName={RouteName.HOME}
       tabBarOptions={{
-        activeTintColor: "#FFF",
-        inactiveTintColor: "#000",
-        activeBackgroundColor: "#2ECC71",
-        inactiveBackgroundColor: "white",
-        // style: {
-        //   backgroundColor: "#CE4418",
-        // },
+        showLabel: false,
+        style: {
+          position: "absolute",
+          bottom: sizes._25sdp,
+          left: sizes._20sdp,
+          right: sizes._20sdp,
+          backgroundColor: "#FFF",
+          elevation: 0,
+          borderRadius: sizes._45sdp,
+          height: sizes._90sdp,
+        },
       }}
-      backBehavior="history"
+      // backBehavior="history"
     >
       <Tab.Screen
         name={RouteName.HOME}
